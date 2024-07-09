@@ -11,6 +11,12 @@ const UserForm: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if(phoneNumber.length < 10){
+      alert('Enter a valid phone number')
+      return;
+    }
+
     localStorage.setItem('userDetails', JSON.stringify({ name, phoneNumber, email }));
     navigate('/second-page');
   };
@@ -33,6 +39,7 @@ const UserForm: React.FC = () => {
           <TextField
             fullWidth
             margin="normal"
+            type='number'
             label="Phone Number"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
