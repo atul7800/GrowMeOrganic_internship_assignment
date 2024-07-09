@@ -1,10 +1,9 @@
-// src/components/DepartmentListComponent.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { List, ListItem, ListItemText, Collapse, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
-// Provided JSON data
+//JSON data
 const departmentsData = [
   {
     department: 'customer_service',
@@ -18,10 +17,10 @@ const departmentsData = [
 
 const DepartmentList: React.FC = () => {
   const [open, setOpen] = useState<Record<string, boolean>>({});
-  const [checked, setChecked] = useState<Record<string, boolean>>({});
+  const [checked, setChecked] = useState<Record<string, boolean>>(initializeCheckedState());
 
   // Initialize checked state for departments and sub-departments
-  const initializeCheckedState = () => {
+  function initializeCheckedState() {
     let initialChecked: Record<string, boolean> = {};
     departmentsData.forEach((dept) => {
       initialChecked[dept.department] = false;
@@ -30,7 +29,11 @@ const DepartmentList: React.FC = () => {
       });
     });
     return initialChecked;
-  };
+  }
+
+  useEffect(() => {
+    setChecked(initializeCheckedState());
+  }, []);
 
   const handleDepartmentCheckboxChange = (department: string) => {
     const newCheckedState: Record<string, boolean> = { ...checked };
@@ -104,7 +107,7 @@ const DepartmentList: React.FC = () => {
                       />
                     }
                     label={subDept}
-                    sx={{ ml: 5 }} // Add margin-left 
+                    sx={{ ml: 5 }} // Add margin-left to the FormControlLabel
                   />
                 ))}
               </FormGroup>

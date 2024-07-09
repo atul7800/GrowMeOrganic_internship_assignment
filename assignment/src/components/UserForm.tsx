@@ -1,4 +1,3 @@
-// src/components/UserForm.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
@@ -12,7 +11,7 @@ const UserForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if(phoneNumber.length < 10){
+    if(phoneNumber.length != 10){
       alert('Enter a valid phone number')
       return;
     }
